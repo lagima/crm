@@ -15,7 +15,7 @@ class HomeController extends Controller {
 
 	public function indexAction() {
 
-		echo "Sample file test";
+		echo "Sample file test git";
 	}
 
 }
