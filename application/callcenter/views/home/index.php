@@ -1,0 +1,1 @@
+<?php $this->layout($gs_template, $ga_templatedata) ?>
