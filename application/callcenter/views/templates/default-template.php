@@ -99,6 +99,18 @@
 							</a>
 						</li>
 
+						<li class="treeview <?= in_array($gs_currentpage, ['/callcenter/all-data', '/callcenter/researching-data']) ? active : ''?>">
+							<a href="#">
+								<i class="fa fa-database"></i> <span>Data</span>
+								<i class="fa fa-angle-left pull-right"></i>
+							</a>
+							<ul class="treeview-menu">
+								<li><a href="/callcenter/all-data"><i class="fa fa-circle-o"></i> All Data</a></li>
+								<li><a href="/callcenter/researching-data"><i class="fa fa-circle-o"></i> Researching</a></li>
+								<li><a href="/callcenter/all-data"><i class="fa fa-circle-o"></i> Usable</a></li>
+							</ul>
+						</li>
+
 					</ul>
 				</section>
 				<!-- /.sidebar -->
