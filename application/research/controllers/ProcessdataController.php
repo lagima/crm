@@ -174,7 +174,7 @@ class ProcessdataController extends Controller {
 							if(isset($la_data['WKT']) && empty($la_data['WKT']))
 								unset($la_data['WKT']);
 
-							$this->dataresearchmodel->updateownerdata($la_data, $lo_data->id);
+							$this->dataresearchmodel->updateimportownerdata($la_data, $lo_data->id);
 
 						break;
 
@@ -184,7 +184,7 @@ class ProcessdataController extends Controller {
 							$la_data = [];
 							$la_data['change'] = $lo_data->__change__;
 
-							$this->dataresearchmodel->updateownerdata($la_data, $lo_data->id);
+							$this->dataresearchmodel->updateimportownerdata($la_data, $lo_data->id);
 
 						break;
 
@@ -258,7 +258,7 @@ class ProcessdataController extends Controller {
 							if(isset($la_data['WKT']) && empty($la_data['WKT']))
 								unset($la_data['WKT']);
 
-							$this->dataresearchmodel->updatestreetdata($la_data, $lo_data->id);
+							$this->dataresearchmodel->updateimportstreetdata($la_data, $lo_data->id);
 
 						break;
 
@@ -268,7 +268,7 @@ class ProcessdataController extends Controller {
 							$la_data = [];
 							$la_data['change'] = $lo_data->__change__;
 
-							$this->dataresearchmodel->updatestreetdata($la_data, $lo_data->id);
+							$this->dataresearchmodel->updateimportstreetdata($la_data, $lo_data->id);
 
 						break;
 

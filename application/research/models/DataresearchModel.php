@@ -91,22 +91,16 @@ class DataresearchModel extends Model {
 	}
 
 
-	public function savepropertydata($pa_data, $pa_updatefields = null) {
+	public function getimportdata($pi_batchsize = 10000) {
 
-		if(is_null($pa_updatefields))
-			$pa_updatefields = ['propertytype', 'estatedescription', 'locality', 'territorialauthority'];
+		// Set the table to query
+		$this->settable(self::TABLE_IMPORTSTREETOWNER);
 
-		$this->db->dbinsertupdate(self::TABLE_PROPERTY, $pa_data, $pa_updatefields);
+		$la_data = $this->getrows(['imported' => 0], $pi_batchsize);
+
+		return $la_data;
 	}
 
-
-	public function saveownerdata($pa_data, $pa_updatefields = null) {
-
-		if(is_null($pa_updatefields))
-			$pa_updatefields = ['ownername', 'deleted'];
-
-		$this->db->dbinsertupdate(self::TABLE_OWNER, $pa_data, $pa_updatefields);
-	}
 
 	/**
 	 * This imports data into owner table
@@ -126,7 +120,7 @@ class DataresearchModel extends Model {
 	}
 
 
-	public function updateownerdata($pa_data, $pi_ownerid) {
+	public function updateimportownerdata($pa_data, $pi_ownerid) {
 
 		// Set the table to query
 		$this->settable(self::TABLE_IMPORTOWNER);
@@ -137,7 +131,7 @@ class DataresearchModel extends Model {
 	}
 
 
-	public function updatestreetdata($pa_data, $pi_ownerid) {
+	public function updateimportstreetdata($pa_data, $pi_ownerid) {
 
 		// Set the table to query
 		$this->settable(self::TABLE_IMPORTSTREET);
@@ -145,17 +139,6 @@ class DataresearchModel extends Model {
 		$lb_success = $this->updaterows($pa_data, ['id' => $pi_ownerid]);
 
 		return $lb_success;
-	}
-
-
-	public function getimportdata($pi_batchsize = 10000) {
-
-		// Set the table to query
-		$this->settable(self::TABLE_IMPORTSTREETOWNER);
-
-		$la_data = $this->getrows(['imported' => 0], $pi_batchsize);
-
-		return $la_data;
 	}
 
 
@@ -214,6 +197,68 @@ class DataresearchModel extends Model {
 		}
 
 		return $lb_result;
+	}
+
+
+	public function getproperty($pi_propertyid) {
+
+		// Set the table to query
+		$this->settable(self::TABLE_PROPERTY);
+
+		$lo_property = $this->getrow(['propertyid' => $pi_propertyid]);
+
+		return $lo_property;
+	}
+
+
+	public function savepropertydata($pa_data, $pa_updatefields = null) {
+
+		if(is_null($pa_updatefields))
+			$pa_updatefields = ['propertytype', 'estatedescription', 'locality', 'territorialauthority'];
+
+		$this->db->dbinsertupdate(self::TABLE_PROPERTY, $pa_data, $pa_updatefields);
+	}
+
+
+	public function getowner($pi_ownerid) {
+
+		// Set the table to query
+		$this->settable(self::TABLE_OWNER);
+
+		$lo_owner = $this->getrow(['ownerid' => $pi_ownerid]);
+
+		return $lo_owner;
+	}
+
+
+	public function getownersbyimportid($pi_importownerid) {
+
+		// Set the table to query
+		$this->settable(self::TABLE_OWNER);
+
+		$la_owners = $this->getrows(['importownerid' => $pi_importownerid]);
+
+		return $la_owners;
+	}
+
+
+	public function getownersbyname($ps_name) {
+
+		// Set the table to query
+		$this->settable(self::TABLE_OWNER);
+
+		$la_owners = $this->getrows(['ownername' => $ps_name]);
+
+		return $la_owners;
+	}
+
+
+	public function saveownerdata($pa_data, $pa_updatefields = null) {
+
+		if(is_null($pa_updatefields))
+			$pa_updatefields = ['ownername', 'deleted'];
+
+		$this->db->dbinsertupdate(self::TABLE_OWNER, $pa_data, $pa_updatefields);
 	}
 
 }
