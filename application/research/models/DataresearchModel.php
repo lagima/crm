@@ -125,7 +125,7 @@ class DataresearchModel extends Model {
 		// Set the table to query
 		$this->settable(self::TABLE_IMPORTOWNER);
 
-		$lb_success = $this->updaterows($pa_data, ['id' => $pi_ownerid]);
+		$lb_success = $this->update($pa_data, ['id' => $pi_ownerid]);
 
 		return $lb_success;
 	}
@@ -136,7 +136,7 @@ class DataresearchModel extends Model {
 		// Set the table to query
 		$this->settable(self::TABLE_IMPORTSTREET);
 
-		$lb_success = $this->updaterows($pa_data, ['id' => $pi_ownerid]);
+		$lb_success = $this->update($pa_data, ['id' => $pi_ownerid]);
 
 		return $lb_success;
 	}
@@ -149,14 +149,14 @@ class DataresearchModel extends Model {
 
 		$la_data = ['imported' => 1];
 		$la_condition = ['id' => $pi_streetid];
-		$this->updaterows($la_data, $la_condition);
+		$this->update($la_data, $la_condition);
 
 		// Set the table to query
 		$this->settable(self::TABLE_IMPORTOWNER);
 
 		$la_data = ['imported' => 1];
 		$la_condition = ['id' => $pi_ownerid];
-		$this->updaterows($la_data, $la_condition);
+		$this->update($la_data, $la_condition);
 
 		return true;
 	}
@@ -188,12 +188,12 @@ class DataresearchModel extends Model {
 		// Set the table based on type
 		if($ps_type == 'OWNERS') {
 			$this->settable(self::TABLE_IMPORTCHANGESETOWNER);
-			$lb_result = $this->updaterows(['processed' => 1], ['id' => $pi_id]);
+			$lb_result = $this->update(['processed' => 1], ['id' => $pi_id]);
 		}
 
 		elseif($ps_type == 'STREET') {
 			$this->settable(self::TABLE_IMPORTCHANGESETSTREET);
-			$lb_result = $this->updaterows(['processed' => 1], ['id' => $pi_id]);
+			$lb_result = $this->update(['processed' => 1], ['id' => $pi_id]);
 		}
 
 		return $lb_result;
@@ -259,6 +259,20 @@ class DataresearchModel extends Model {
 			$pa_updatefields = ['ownername', 'deleted'];
 
 		$this->db->dbinsertupdate(self::TABLE_OWNER, $pa_data, $pa_updatefields);
+	}
+
+
+	public function groupwoners($pa_ownerid, $pi_masterownerid) {
+
+		// Set the table to query
+		$this->settable(self::TABLE_OWNER);
+
+		$lb_result = $this->update(['linkid' => $pi_masterownerid], ['ownerid' => $pa_ownerid]);
+
+		if($lb_result)
+			$lb_result = $this->update(['ismaster' => 1], ['ownerid' => $pi_masterownerid]);
+
+		return $lb_result;
 	}
 
 }
