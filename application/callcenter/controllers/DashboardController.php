@@ -13,7 +13,7 @@ class DashboardController extends Controller {
 		*/
 	}
 
-	public function indexAction() {
+	public function dashboardAction() {
 
 		// echo "Sample file test git.";
 		$this->buildresponse(['ls_pagetitle' => 'Controller']);

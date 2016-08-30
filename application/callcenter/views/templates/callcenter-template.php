@@ -87,30 +87,17 @@
 					<ul class="sidebar-menu">
 						<li class="header">MAIN NAVIGATION</li>
 
-						<li class="<?= $gs_currentpage == '/callcenter/dashboard' ? active : ''?>">
+						<li class="<?= $this->uri('/callcenter/dashboard', 'active') ?>">
 							<a href="/callcenter/dashboard">
 								<i class="fa fa-tachometer"></i> <span>Dashboard</span>
 							</a>
 						</li>
 
-						<li class="<?= $gs_currentpage == '/callcenter/data' ? active : ''?>">
-							<a href="/callcenter/data">
+						<li class="<?= $this->uri('/callcenter/datagroup', 'active') ?>">
+							<a href="/callcenter/datagroup">
 								<i class="fa fa-database"></i> <span>Data</span>
 							</a>
 						</li>
-
-						<li class="treeview <?= in_array($gs_currentpage, ['/callcenter/all-data', '/callcenter/researching-data']) ? active : ''?>">
-							<a href="#">
-								<i class="fa fa-database"></i> <span>Data</span>
-								<i class="fa fa-angle-left pull-right"></i>
-							</a>
-							<ul class="treeview-menu">
-								<li><a href="/callcenter/all-data"><i class="fa fa-circle-o"></i> All Data</a></li>
-								<li><a href="/callcenter/researching-data"><i class="fa fa-circle-o"></i> Researching</a></li>
-								<li><a href="/callcenter/all-data"><i class="fa fa-circle-o"></i> Usable</a></li>
-							</ul>
-						</li>
-
 					</ul>
 				</section>
 				<!-- /.sidebar -->
@@ -131,6 +118,10 @@
 
 		</div><!-- ./wrapper -->
 
+		<!-- Constants -->
+		<script>
+			var gs_viewname = '<?= $gs_viewname ?>';
+		</script>
 		<!-- jQuery 2.1.4 -->
 		<script src="<?= $this->asset('/assets/vendors/mercury/framework/plugins/jQuery/jQuery-2.1.4.min.js') ?>"></script>
 		<!-- jQuery UI 1.11.4 -->

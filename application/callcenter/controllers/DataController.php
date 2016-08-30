@@ -13,7 +13,7 @@ class DataController extends Controller {
 		*/
 	}
 
-	public function indexAction() {
+	public function datagroupAction() {
 
 		// echo "Sample file";
 	}
